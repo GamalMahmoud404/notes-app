@@ -1,5 +1,0 @@
-gmah7773_db_user
-
-o2LQCOQYX1bHrMSi
-
-mongodb://gmah7773_db_user:o2LQCOQYX1bHrMSi@ac-nivj2kt-shard-00-00.ka79yms.mongodb.net:27017,ac-nivj2kt-shard-00-01.ka79yms.mongodb.net:27017,ac-nivj2kt-shard-00-02.ka79yms.mongodb.net:27017/?ssl=true&replicaSet=atlas-20fh0k-shard-0&authSource=admin&appName=Cluster0
