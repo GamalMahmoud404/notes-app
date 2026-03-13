@@ -98,12 +98,13 @@ body {
 
 .note-card p {
   display: -webkit-box;        /* ضروري لـ line-clamp */
-  -webkit-line-clamp: 4;       /* عدد السطور اللي عايزها */
+  -webkit-line-clamp: 3;       /* عدد السطور اللي عايزها */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;     
   opacity: 0.8;
   font-size: 17px;
+    min-height: calc(1.2em * 3); 
 }
 
 .note-card h3 {
@@ -277,7 +278,7 @@ body {
   background: rgb(5, 102, 141);
   background: linear-gradient(
     63deg,
-    #05668d 0%,
+    #245e67 0%,
     rgba(66, 122, 161, 1) 36%,
     rgba(235, 242, 250, 1) 94%
   );
