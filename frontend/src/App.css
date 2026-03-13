@@ -1,0 +1,445 @@
+/* ==================== المتغيرات ==================== */
+:root {
+  /* Light Mode Colors */
+  --bg-color: #dbdbdb;
+  --text-color: #000000;
+  --header-bg: #6c88a4;
+  --footer-bg: #6c88a4;
+  --card-bg: #f0f0f0;
+  --note-card-br:#ddd;
+  --note-textarea-br:#ccc;
+  --highlight-color:#afafaf;
+  --notes-grid-bg:#e2e2e2;
+  --pagination-pg:#bbbbbb;
+  --btn-bg: #3a86d1;
+  --btn-hover-bg: #1565c0;
+  --modal-bg: #ffffff;
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --AiOutlinePlus-bg: #73ade7 ;
+}
+
+/* Dark Mode Colors */
+.dark {
+  --bg-color: #181818;
+  --text-color: #ffffff;
+  --header-bg: #485a6c;
+  --footer-bg: #485a6c;
+  --card-bg: #2c2c2c;
+  --note-card-br:#555555;
+  --note-textarea-br:#4e4e4e;
+  --highlight-color:#666666;
+  --notes-grid-bg:#202020;
+  --pagination-pg:#4d4d4d;
+  --btn-bg: #284b6f;
+  --btn-hover-bg: #295178;
+  --modal-bg: #1e1e1e;
+  --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+  --AiOutlinePlus-bg:rgb(110, 110, 110) ;
+}
+
+/* ==================== Body & Basics ==================== */
+
+:root{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 110px;
+}
+
+/* ==================== صفحة الملاحظات ==================== */
+.page_master {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {  
+  .page_master {
+    width: 90%;
+  }
+}
+
+/* ==================== Notes Grid ==================== */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  background-color: var(--notes-grid-bg);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.AiOutlinePlus-d{
+  background : var(--AiOutlinePlus-bg);
+  border-radius: 30px ;
+  padding: 5px;
+}
+
+.note-card {
+  border: 1px solid var(--note-card-br);
+  padding: 15px 15px 55px;
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  position: relative;
+}
+
+.note-card p {
+  display: -webkit-box;        /* ضروري لـ line-clamp */
+  -webkit-line-clamp: 4;       /* عدد السطور اللي عايزها */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;     
+  opacity: 0.8;
+  font-size: 17px;
+}
+
+.note-card h3 {
+  margin-top: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--first-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: var(--pagination-pg);
+  cursor: not-allowed;
+}
+
+/* ==================== Buttons ==================== */
+.add-btn,
+.buttons button,
+.modal-content button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover,
+.buttons button:hover,
+.modal-content button:hover {
+  background-color: var(--btn-hover-bg);
+  opacity: 0.9;
+}
+
+.buttons {
+  margin-top: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--modal-overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background-color: var(--modal-bg);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: scale(0.7);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+@media (max-width: 600px) {  
+  .modal-content {
+  width: 320px;
+}
+}
+
+.modal-content.open {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-content.close {
+  transform: scale(0.7);
+  opacity: 0;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid var(--note-textarea-br);
+  background-color: var(--modal-bg);
+  color: var(--text-color);
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  outline: none; 
+  border-color: var(--highlight-color); 
+  background-color: var(--modal-bg-active); 
+}
+
+/* ==================== Header & Footer ==================== */
+.app-header {
+  background-color: var(--header-bg);
+  color: var(--text-color);
+  padding: 10px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+}
+
+/* ====== dark === */
+
+/* The switch - the box around the slider */
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(5, 102, 141);
+  background: linear-gradient(
+    63deg,
+    #05668d 0%,
+    rgba(66, 122, 161, 1) 36%,
+    rgba(235, 242, 250, 1) 94%
+  );
+  background-size: 300% 300%;
+  background-position: right center;
+  transition: 0.5s cubic-bezier(0.24, 0.51, 0.32, 0.98);
+  border-radius: 30px;
+  box-shadow:
+    inset 3px 3px 3px rgba(235, 242, 250, 0.42),
+    inset -4px -4px 4px rgba(235, 242, 250, 0.42);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 20px;
+  left: 0.3em;
+  bottom: 0.3em;
+  background: linear-gradient(
+    127deg,
+    rgba(235, 242, 250, 1) 0%,
+    rgba(137, 149, 164, 1) 66%,
+    rgba(20, 30, 42, 1) 100%
+  );
+  background-size: 350% 250%;
+  background-position: left center;
+  box-shadow:
+    3px 3px 4px rgba(100, 116, 133, 0.5),
+    -3px -3px 4px rgba(235, 242, 250, 0.4);
+  transition: 0.4s cubic-bezier(0.7, 0.34, 0.5, 1);
+}
+
+/* Animation for checked state */
+.switch input:checked + .slider {
+  background-position: top left;
+  box-shadow:
+    inset 3px 3px 3px rgba(47, 88, 116, 0.7),
+    inset -4px -4px 4px #067cab;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1.5em) scale(1.15);
+  background-size: 380% 300%;
+  background-position: right;
+  box-shadow:
+    3px 3px 4px #2f5874,
+    -2px -2px 3px #067cab;
+  animation: bounce 0.4s ease;
+}
+
+/* Animation for unchecked state */
+.switch input:not(:checked) + .slider:before {
+  animation: bounce-reverse 0.4s ease;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(1.7em) scaleX(0.8) scaleY(1.2);
+  }
+  75% {
+    transform: translateX(1.45em) scaleX(1.1) scaleY(0.9);
+  }
+  100% {
+    transform: translateX(1.5em) scale(1.15);
+  }
+}
+
+@keyframes bounce-reverse {
+  0% {
+    transform: translateX(1.5em) scale(1.15);
+  }
+  50% {
+    transform: translateX(-0.2em) scaleX(0.8) scaleY(1.2);
+  }
+  75% {
+    transform: translateX(0.1em) scaleX(1.1) scaleY(0.9);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* ---- */
+
+
+.app-footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  padding: 10px;
+  height: 70px;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+
+
+
+
+
+
+/* الأزرار داخل NoteCard */
+.buttons button {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* مسافة بين الأيقونة والنص */
+  background-color: var(--button-bg, #1976d2);
+  color: var(--button-color, white);
+  transition: 0.3s;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+/* زر إضافة ملاحظة */
+.add-btn {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: var(--button-bg, #1976d2);
+  color: var(--button-color, white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background-color: var(--button-bg-hover, #1565c0);
+}
+
+/* Dark Mode Variables */
+body {
+  --button-bg: #3686d5;
+  --button-bg-hover: #1565c0;
+  --button-color: white;
+  --icon-color: white; /* لون الأيقونات */
+}
+
+body.dark {
+  --button-bg: #3e404a;
+  --button-bg-hover: #505050;
+  --button-color: #f0f0f0;
+  --icon-color: #f0f0f0;
+}
+
+/* نطبق اللون على أيقونات React Icons */
+.buttons button svg,
+.add-btn svg {
+  color: var(--icon-color);
+}
